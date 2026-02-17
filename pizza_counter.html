@@ -8,10 +8,10 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: transparent;
+      background: #dfe7e8;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       height: 100px;
       overflow: hidden;
       padding: 0 12px;
@@ -83,7 +83,7 @@
 
     function update() {
       const delta = Math.floor(Math.random() * 4) + 1;
-      const direction = Math.random() > 0.5 ? 1 : -1; // 50/50 rauf oder runter
+      const direction = Math.random() > 0.5 ? 1 : -1;
       current = Math.max(0, current + delta * direction);
 
       el.classList.add('flash');
