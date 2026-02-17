@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100px;
+      overflow: hidden;
+      padding: 0 12px;
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #96d010;
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-right: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      animation: pulse 1.2s infinite;
+      flex-shrink: 0;
+    }
+
+    .live-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      line-height: 1;
+      color: #96d010;
+      transition: all 0.15s ease;
+      margin-right: 12px;
+    }
+
+    .number.flash {
+      transform: scale(1.1);
+      color: #7ab00d;
+    }
+
+    .pizza {
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.6); }
+    }
+  </style>
+</head>
+<body>
+  <div class="live-badge">
+    <div class="dot"></div>
+    <span class="live-text">LIVE</span>
+  </div>
+  <div class="number" id="zahl">247</div>
+  <div class="pizza">🍕</div>
+
+  <script>
+    const el = document.getElementById('zahl');
+    let current = 247;
+
+    function update() {
+      const delta = Math.floor(Math.random() * 4) + 1;
+      const direction = Math.random() > 0.5 ? 1 : -1; // 50/50 rauf oder runter
+      current = Math.max(0, current + delta * direction);
+
+      el.classList.add('flash');
+      el.textContent = current;
+      setTimeout(() => el.classList.remove('flash'), 200);
+
+      const next = 1000 + Math.random() * 2000;
+      setTimeout(update, next);
+    }
+
+    setTimeout(update, 2000);
+  </script>
+</body>
+</html>
